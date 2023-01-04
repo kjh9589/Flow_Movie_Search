@@ -4,6 +4,9 @@ import Dependencies.applyHilt
 import Dependencies.applyOkhttp3
 import Dependencies.applyRetrofit2
 import Dependencies.applyTest
+import java.io.File
+import java.io.FileInputStream
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -16,6 +19,10 @@ plugins {
 android {
     compileSdk = Dependencies.COMPILE_SDK
 
+    val properties = Properties().apply {
+        load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+    }
+
     defaultConfig {
         applicationId = "com.kjs.flow"
         minSdk = Dependencies.MIN_SDK
@@ -24,6 +31,10 @@ android {
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "naverClientId", properties.getProperty("naver.api.client.id"))
+        buildConfigField("String", "naverClientSecret", properties.getProperty("naver.api.client.secret"))
+        buildConfigField("String", "naverMovieUrl", "\"https://openapi.naver.com/\"")
     }
 
     buildTypes {
@@ -52,6 +63,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":model"))
     applyAppAndroidX()
     applyTest()
     implementation(Dependencies.Google.MATERIAL)
