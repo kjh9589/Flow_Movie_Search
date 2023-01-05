@@ -1,4 +1,4 @@
-package com.kjs.domain.repository
+package com.kjs.domain.repository.movie
 
 import androidx.paging.PagingData
 import com.kjs.domain.usecase.movie.SearchNaverMovieUseCase

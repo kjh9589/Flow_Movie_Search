@@ -70,7 +70,7 @@ object Dependencies {
 
         // Room
         const val ROOM_VERSION = "2.4.3"
-        const val ROOM = "androidx.room:room-runtime:$ROOM_VERSION"
+        const val ROOM = "androidx.room:room-ktx:$ROOM_VERSION"
         const val ROOM_COMPILER = "androidx.room:room-compiler:$ROOM_VERSION"
     }
 
