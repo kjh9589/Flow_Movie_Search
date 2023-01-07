@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Flow</string>
+    <!-- Notice -->
+    <string name="notice_input_keyword">검색어를 입력해주세요.</string>
+
+    <!-- Error -->
+    <string name="error_input_search_keyword">검색어를 입력해주세요.</string>
+
+    <!-- General -->
+    <string name="general_search">검색</string>
+    <string name="general_recent_search">최근검색</string>
+    <string name="general_recent_search_history">최근 검색 이력</string>
+    <string name="general_title">제목</string>
+    <string name="general_publish_date">출시</string>
+    <string name="general_rating">평점</string>
+</resources>
