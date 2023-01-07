@@ -1,5 +1,5 @@
 package com.kjs.model.history
 
-data class HistorySearchKeyword(
+data class HistorySearchKeywordModel(
     val keyword: String
 )

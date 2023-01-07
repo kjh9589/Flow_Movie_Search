@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="movieModel"
+            type="com.kjs.model.movie.MovieModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/thumbnailImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@color/black"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{movieModel.imageUri}"
+            app:round="5dp" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="10dp"
+            app:titleWithHtml="@{movieModel.title}"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/thumbnailImageView"
+            app:layout_constraintTop_toTopOf="@id/thumbnailImageView"
+            app:layout_constraintBottom_toTopOf="@id/dateTextView"
+            tools:text="제목" />
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="10dp"
+            app:publishDate="@{movieModel.publishDate}"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/titleTextView"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            app:layout_constraintBottom_toTopOf="@id/ratingTextView"
+            tools:text="출시" />
+
+        <TextView
+            android:id="@+id/ratingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="10dp"
+            app:rating="@{movieModel.rating}"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/dateTextView"
+            app:layout_constraintTop_toBottomOf="@id/dateTextView"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnailImageView"
+            tools:text="평점" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

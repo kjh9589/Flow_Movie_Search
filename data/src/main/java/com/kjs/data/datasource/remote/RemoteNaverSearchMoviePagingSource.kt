@@ -1,11 +1,13 @@
 package com.kjs.data.datasource.remote
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.kjs.data.api.NaverSearchMovieService
 import com.kjs.data.response.movie.toMovieModel
 import com.kjs.data.util.convertCommonApiResult
 import com.kjs.domain.di.IoDispatcher
+import com.kjs.domain.result.CommonResult
 import com.kjs.domain.result.CommonResultState
 import com.kjs.domain.usecase.movie.SearchNaverMovieUseCase
 import com.kjs.model.movie.MovieModel
@@ -39,18 +41,17 @@ class RemoteNaverSearchMoviePagingSource @Inject constructor(
 
                 val data = result.convertCommonApiResult()
 
-
-
-                if (data.status == CommonResultState.SUCCESS) {
-                    val prevKey = null
-                    val nextKey = if (data.data!!.items.isEmpty()) null else idx + 1
-
-                    idx += 1
-
-                    LoadResult.Page(data = data.data!!.items.map { it.toMovieModel() }, prevKey, nextKey)
-                } else {
-                    LoadResult.Error(Throwable("${data.message}"))
+                if (data.status == CommonResultState.FAILURE) {
+                    val exception = Exception("${data.message}")
+                    throw exception
                 }
+
+                val prevKey = null
+                val nextKey = if (data.data!!.total < idx + DISPLAY_COUNT) null else idx + DISPLAY_COUNT
+
+                idx += DISPLAY_COUNT
+
+                LoadResult.Page(data = data.data!!.items.map { it.toMovieModel() }, prevKey, nextKey)
 
             }
         } catch (e: Exception) {
