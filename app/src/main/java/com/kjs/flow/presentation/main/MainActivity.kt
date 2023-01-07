@@ -47,6 +47,7 @@ class MainActivity : CommonActivity() {
         if (it.resultCode == RESULT_OK) {
             it.data?.getStringExtra(HistoryActivity.SEARCH_KEYWORD)?.let { keyword ->
                 binding.keywordEditText.setText(keyword)
+                binding.keywordEditText.setSelection(keyword.length)
                 viewModel.searchMovie(keyword, getString(R.string.error_input_search_keyword))
             }
         }
