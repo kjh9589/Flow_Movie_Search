@@ -1,5 +1,6 @@
 package com.kjs.data.repository_impl.remote.movie
 
+import android.content.Context
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -14,14 +15,16 @@ import javax.inject.Inject
 
 class NaverMovieSearchRepositoryImpl @Inject constructor(
     private val api: NaverSearchMovieService,
-    @IoDispatcher private val dispatcher: CoroutineDispatcher
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
+    private val context: Context
 ): NaverMovieSearchRepository {
     override suspend fun searchNaverMovieList(keyword: String): Flow<PagingData<MovieModel>> {
         return Pager(PagingConfig(RemoteNaverSearchMoviePagingSource.DISPLAY_COUNT)) {
             RemoteNaverSearchMoviePagingSource(
                 dispatcher = dispatcher,
                 api = api,
-                keyword = keyword
+                keyword = keyword,
+                context = context
             )
         }.flow
     }
