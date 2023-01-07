@@ -1,8 +1,10 @@
 package com.kjs.data.datasource.remote
 
+import android.content.Context
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.kjs.data.R
 import com.kjs.data.api.NaverSearchMovieService
 import com.kjs.data.response.movie.toMovieModel
 import com.kjs.data.util.convertCommonApiResult
@@ -19,7 +21,8 @@ import javax.inject.Inject
 class RemoteNaverSearchMoviePagingSource @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
     private val api: NaverSearchMovieService,
-    private val keyword: String
+    private val keyword: String,
+    private val context: Context
 ) : PagingSource<Int, MovieModel>() {
     companion object {
         const val START_IDX = 1
@@ -43,6 +46,11 @@ class RemoteNaverSearchMoviePagingSource @Inject constructor(
 
                 if (data.status == CommonResultState.FAILURE) {
                     val exception = Exception("${data.message}")
+                    throw exception
+                }
+                
+                if (data.data!!.total == 0) {
+                    val exception = Exception(context.getString(R.string.error_empty_search_result))
                     throw exception
                 }
 
