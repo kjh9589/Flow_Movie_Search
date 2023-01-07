@@ -18,8 +18,8 @@ class HistoryViewModel @Inject constructor(
     val historyList: LiveData<List<HistorySearchKeywordModel>>
         get() = _historyList
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?>
         get() = _error
 
     fun getHistoryKeyword() {
@@ -35,6 +35,6 @@ class HistoryViewModel @Inject constructor(
     }
 
     fun clearHolder() {
-        _error.value = ""
+        _error.value = null
     }
 }
