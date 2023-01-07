@@ -66,6 +66,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":model"))
+
     applyAppAndroidX()
     applyTest()
     implementation(Dependencies.Google.MATERIAL)

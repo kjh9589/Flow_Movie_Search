@@ -30,8 +30,11 @@ fun <T> Response<T>.convertCommonApiResult(): CommonApiResult<T> {
             CommonResultState.INVALID_SEARCH_API.code -> {
                 CommonResultState.INVALID_SEARCH_API
             }
-            else -> {
+            CommonResultState.SYSTEM_ERROR.code -> {
                 CommonResultState.SYSTEM_ERROR
+            }
+            else -> {
+                CommonResultState.FAILURE
             }
         }
 
