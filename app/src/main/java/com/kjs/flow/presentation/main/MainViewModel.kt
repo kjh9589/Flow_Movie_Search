@@ -34,6 +34,7 @@ class MainViewModel @Inject constructor(
         get() = _error
 
     fun searchMovie(keyword: String, errorMsg: String) {
+        _error.value = ""
         viewModelScope.launch {
             if (keyword.trim().isEmpty()) {
                 _error.value = errorMsg
